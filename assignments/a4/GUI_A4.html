@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<!--
+  File: GUI_A4.html  
+  91.461 Assignment 4: Formatting Dynamic Text
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.
+  Created by CP on October 5, 2013 at 12:10 PM
+  Updated by CP on October 7, 2013 at 8:29 PM
+
+  NOTES:
+  - I used the exact same CSS file (styles.css) from the previous assignment. Hope that's an acceptable practice, I simply just appended additional styles to it. The CSS file acknowledges this as well. 
+
+  - In my JSON file, I REALLY wasn't sure how to label the title of the article, and the the lesser but still significant titles that precede certain paragraphs. I tried to be clever and use HEADLINE for the "title" of the article and title for the lesser paragraph titles.   
+
+  - I know that I should be creative and do some cool things with the text, but I'm already running out of ideas... I just wonder how everyone else handles this case. 
+
+  CREDITS:
+  - Professor Heines. Everything peice of code in the script tags is credit to Professor Heines, with the exception of the script tag which contains the placeContent function. While that is my original code, it was still based off of Professor Heines' example page. I simply observed the syntax and created my own function for my own JSON. 
+
+  - Source of the JSON file is , I understand that JSON cannot be commented, just adding a source here to provide some kind of credit which is due. 
+-->
+<title>Corey Prak, GUI Assignment 4</title>
+<!-- <meta http-equiv="refresh" content="3" > -->
+
+<link rel="stylesheet" href="../../css/styles.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+  var story;
+
+  jQuery.ajax({
+    async: false,
+    dataType: "json", 
+    url: "article.json", 
+    success: function(data){
+      story = data;
+    }
+  });
+
+  $(document).ready(function(){
+    placeContent();
+  });
+</script>
+
+<!--
+  In short, the JSON file is composed of an object which has values named headline, author, contact, date, source, and text. Everything is simply a string with the exception of text, which is an array of objects which have two values, a string title, and an array of strings which is represented by paragraphs. There is also a simple image value. 
+
+ I would have liked to have more time to extend that functionality. For instance, dynamically floating an array of images based styles which could be specified by the loop iterating through it. 
+
+  This is different from Professor Heines' sample assignment of the Gettysburg Address or other articles in that certain paragraphs have a preceding title. I went ahead and created a JSON file with a structure that would work, and I hope that it makes sense from a real world perspective. 
+-->
+<script type="text/javascript">
+  function placeContent(){
+
+    var strContent = "";
+
+    strContent += "<h1 class='headline'>" + story.headline + "</h1>";
+    strContent += "<h2 class='author'>" + "By " + story.author + "</h2>";
+    strContent += "<h2 class='contact'>" + story.contact + "</h2>";
+    strContent += "<h2 class='date'>" + story.date + "</h2>";
+
+    strContent += "<div class='right'><img src='" + story.image + "' class='articleImage' alt='Tesla Car on Fire," + story.image + "'></div>";
+
+    for (var textBlock = 0; textBlock < story.text.length; textBlock++){
+
+      strContent += "<div class='center'>";
+
+      strContent += "<h3 class='articleTitle'>" + story.text[textBlock].title + "</h3>";
+      
+      for (paraIter = 0; paraIter < story.text[textBlock].paragraphs.length; paraIter++){
+      <!-- Makes sure that ONLY the first letter of first paragraph is modified. -->
+        if ( (paraIter == 0) && (textBlock == 0) )
+        { 
+          strContent += "<p class='firstArticleParagraph'>" + story.text[textBlock].paragraphs[paraIter] + "</p>";
+	}
+        
+        else
+	{
+	  strContent += "<p class='articleParagraph'>" + story.text[textBlock].paragraphs[paraIter] + "</p>";
+        }
+      }
+
+      strContent += "</div>";
+    }
+
+    <!-- Had to put div here in order to center, since link text is supposedly not considered text. -->
+    strContent += "<div class='center'>" + "<p>Article Source: " + "<a href='" + story.source + "' class='source'>" + story.source + "</a></p>";
+
+    strContent += "<p>Image Source: " + "<a href='" + story.image + "'>" + story.image + "</a></p>";
+
+    $("#articleContent").html(strContent);
+  }
+</script>
+
+</head>
+<body>
+
+<div class="header">
+  <div class="left">
+    GUI Assignment 4, Dynamically Formatting Text
+    <p></p>
+    Corey Prak, corey_prak@student.uml.edu
+    <p>
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">
+          <img class="validation_icon"
+               src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+               alt="Valid CSS!"/>
+        </a>
+
+        <a href="http://validator.w3.org/check/referer">
+          <img class="validation_icon" 
+               src="../../images/html5-logo.png"
+               alt="Valid HTML!"/>
+        </a>
+    </p>
+  </div>
+
+  <div class="right">
+    <a href="../../index.html">Back to main page...</a>
+  </div>
+</div>
+
+<div id="articleContent"></div>
+</body>
+</html>

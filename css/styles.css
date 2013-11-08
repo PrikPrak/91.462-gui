@@ -1,0 +1,163 @@
+/*
+  File: styles.css  
+  91.461 Assignment 3: Styling Your First Web Page With CSS
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.
+  Created by CP on September 24, 2013 at 9:30 PM
+  Updated by CP on October 7, 2013 at 8:30 PM
+  Updated by CP on October 28, 2013, at 2:22 AM
+
+  NOTES:
+  I believe most of the styles are self explanatory, do let me know if you'd like me to elaborate on anything. I will be sure to add any additional documentation to this section as needed.
+
+  09/24/2013 - Validated and added icons accordingly.
+
+  09/24/2013 - Created file, ported styles from .html to here, added a couple of new ones.
+
+  10/06/2013 - Added styles for GUI Assignment 4 which mostly concerns news article formatting. The mentioned styles begin with the headline style and proceeds for the remainder of the file. 
+
+  10/28/2013 - 
+
+  CREDITS:
+  http://www.w3schools.com/css/default.asp - Provided resources for literally every style except the last one, which is .center.
+
+  http://www.codeitpretty.com/2012/05/you-cant-float-center.html - Provided inspiration for the .center style.  
+
+  http://css-tricks.com/all-about-floats/ - For teaching me information of floats, content which has been used in this file. 
+*/
+
+html{padding-top: 25px;}
+
+p{text-indent:50px;}
+
+/*Youtube's generated iframe tag fails validation. We are instead advised to use CSS for frame borders, which I believe are mandatory(???).
+*/
+iframe{border-width:1px;}
+
+body{background-color:#FFFFCC;}
+
+.left
+{
+  float:left;
+  padding:30px;
+}
+
+.right
+{
+  float:right;
+  padding:30px;
+}
+
+.post
+{
+  clear:both;
+  width:60%;
+  margin:auto;
+  padding-top:25px;
+  padding-bottom:25px;
+  text-align:center;
+}
+
+/*This style exists simply as a design preference. It is the same as .post, however, 
+  does not include any padding on top.*/
+.top_post
+{
+  clear:both;
+  width:60%;
+  margin:auto;
+  text-align:center;
+} 
+
+/*Reiterating, .bottom_post is the same as .post without any bottom or top padding*/
+.bottom_post
+{
+  clear:both;
+  width:60%;
+  margin:auto;
+  padding-top:25px;
+  text-align:center;
+}
+
+/*Have the left and right margins fight for as much length as possibe, then
+  consume %80 of its width.*/
+.center
+{
+  margin:auto;
+  width:80%;
+}
+ 
+.validation_icon
+{
+  width:88px;
+  height:31px;
+  border:0;
+}
+
+.headline
+{
+  font-size:250%;
+}
+
+.date
+{font-style:italic;}
+
+
+.header
+{
+  padding-bottom:200px;
+  font-size:150%;
+}
+
+.author, .headline, .date, .contact, .articleTitle
+{
+  text-align:center;
+}
+
+.source, .contact
+{text-decoration:underline;}
+
+.firstArticleParagraph:first-letter
+{
+  font-family: "Marker Felt", "Comic Sans MS", fantasy;
+  font-size:700%;
+}
+
+.cell
+{
+  background-color:white;  
+}
+
+.column
+{
+  background-color:grey;
+  color:white;
+}
+
+.row
+{
+  background-color:blue;
+  color:white;
+}
+
+.cell, .column, .row
+{
+  text-align:center;
+  padding:10px;
+}
+
+.solidBorder
+{
+  border-style:solid;
+  border-width:5px;
+}
+
+.centerContent
+{
+  text-align:center; 
+}
+
+.formCenter
+{
+  margin:auto;
+  width:20%;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<!--
+  File: GUI_A3.html  
+  91.461 Assignment 3: Styling Your First Web Page With CSS
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.
+  Created by CP on September 24, 2013 at 10:10 PM
+  Updated by CP on September 25, 2013 at 10:15 AM
+
+  NOTES:
+  I've done my best to ensure the code and page itself is organized well. Please do let me know if there's any portion of the file that you'd like me to elaborate on. I'd be more than happy to oblige!
+
+  09/25/2013 - Added a youtube video "post" to the page. Added icons.
+  09/24/2013 - This page has been designed to look KIND of like a blog. Each div kind of represents a post. 
+
+  CREDITS:
+  www.youtube.com - Providing code which was used to embed one of their videos onto my page
+
+  www.imgur.com - Hosting the images displayed on this page.
+
+  http://www.w3c.it/events/2013/css3html5/ - Providing me with an HTML5 Validation icon.
+-->
+  <title>corey_prak@student.uml.edu</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+<!--
+  This div was given a class of top_post for stylistic reasons. I didn't want the same padding-top as the 'post' style.
+-->
+  <div class="top_post">
+    <h1>GUI Assignment 3</h1>
+    <p>This page serves as content for Assignment 3 of GUI, Fall 2013. I will use this page to tell you a little more about the awesome things in my life!</p>
+
+    <p>
+      <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img class="validation_icon"
+             src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+             alt="Valid CSS!"/>
+      </a>
+    </p>
+
+    <p>
+      <a href="http://validator.w3.org/check/referer">
+        <img class="validation_icon" 
+             src="../../images/html5-logo.png"
+             alt="Valid HTML!"/>
+      </a>
+    </p>
+
+     <h2>Navigation:</h2>
+      <a href = "../../index.html">Main Page</a>
+  </div>
+
+<!--
+  The code for the iframe tag is completely credited to Youtube, which was supplied to my by the 'Share' category listed in most videos.
+<-->
+  <div class="post">
+    <h3>My Absolute Favorite Song OF ALL TIME!!!</h3>
+    <iframe class="center" width="500" height="400" src="http://www.youtube.com/embed/jofNR_WkoCE" allowfullscreen></iframe>
+    <p>Seriously, what does the fox say!?!</p>
+  </div>
+
+  <div class="post">
+      <img class="right" src="http://imgur.com/yXrZmAY.jpg" alt="Tiff and Corey"/>
+      <h3>My Partner in Crime</h3>
+    <p>Next to me in this picture is my partner, Tiffany. She's been enough of a saint to put up with me for six years, and hopefully she will be for many more.</p>
+  </div>
+
+<!--
+  This div was given a class of bottom_post for stylistic reasons. I didn't want the same padding-bottom as the 'post' style.
+-->
+  <div class="bottom_post">
+    <img class="left"  src="http://i.imgur.com/ItSQb.jpg" width=500 height=400 alt="Hadouken"/>
+    <h3>My Sidekick</h3>
+    <p>This is my dog, Hadouken, named after Ryu's iconic special move, who's from the Street Fighter video game franchise. He's almost two years old, and is supposedly a Rat Terrier and German Shepherd mix. We're still waiting for him to finish his puppy phase and calm down.</p>  
+  </div>
+
+</body>
+</html>

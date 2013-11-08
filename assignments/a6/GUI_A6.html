@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<!--
+  File: GUI_A5.html  
+  91.461 Assignment 5: Creating a Dynamic Table
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.
+  Updated by CP on October 19, 2013
+  Created by CP on October 20, 2013
+
+  NOTES:
+  
+  CREDITS:
+  https://teaching.cs.uml.edu/~heines/91.461/91.461-2012-13f/461-assn/formutilities.js
+  Jesse Heines, for allowing me to use his Javascript file, which I have inluded in my js directory as formutilities.js
+
+  http://www.w3schools.com/js/js_popup.asp
+  Popup used for debugging.
+
+  http://stackoverflow.com/questions/9716468/is-there-any-function-like-isnumeric-in-javascript-to-validate-numbers
+  Javascript function isNumeric is credited to user Sudhir of StackOverflow.
+
+  http://www.w3schools.com/js/js_form_validation.asp
+  Javascript form validation.
+
+  http://www.w3schools.com/html/html_tables.asp
+  Knowledge of Javascript tables. 
+-->
+
+<title>Corey Prak, GUI Assignment 5</title>
+  <!-- <meta http-equiv="refresh" content="3"> -->
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="js/formutilities.js"></script>
+
+  <script type="text/javascript">
+
+    <!-- Credit for this function goes to user Sudhir of StackOverflow, source found in credits. -->
+    function isNumeric(num)
+    {
+      return !isNaN(parseFloat(num)) && isFinite(num);
+    }
+
+    function generateTable()
+    {
+      var strTest = document.URL;
+      var strTableHTML = "";
+      var intRVal1 = getParameter("h1");
+      var intRVal2 = getParameter("h2");
+      var intCVal1 = getParameter("v1");
+      var intCVal2 = getParameter("v2");
+      var intRIter = 0;
+      var intCIter = 0;
+
+      if ((intRVal1 == null) && (intRVal2 == null) && (intCVal1 == null) && (intCVal2 == null)) return;
+      <!-- window.alert( "---PARAMETERS---" + "\nRow Start: " + getParameter('h1') + "\nRow End: " + getParameter('h2') + getParameter('v1') + getParameter('v2')); -->
+
+      strTableHTML += "<table class='center'>"; 
+
+      for(intRIter = (intRVal1 - 1); intRIter <= intRVal2; intRIter++)
+      {
+        strTableHTML += " <tr>";
+        for(intCIter = (intCVal1 - 1); intCIter <= intCVal2; intCIter++)
+        {
+          <!-- If block which populates entire left column. -->
+          if (intCIter == (intCVal1 - 1))
+          {
+          <!-- Creates an empty cell on the top left part of the table. -->
+            if (intRIter == (intRVal1 - 1))
+            strTableHTML += "<td>" + "&nbsp;"  + "</td>";
+            
+          <!-- Fills other cells in the column with the appropriate value. -->
+            else strTableHTML += "<td class='column'>" + intRIter + "</td>"; 
+          }
+         
+          <!-- If block which populates entire first row. -->
+          else if (intRIter == (intRVal1 - 1))
+          {
+            strTableHTML += "<td class='row'>" + intCIter + "</td>";            
+          }
+
+          <!-- Populates remaining cells with the product of the row and column. -->
+          else
+          {
+            strTableHTML += "<td class='cell'>" + (intCIter * intRIter) + "</td>";
+          }
+        }
+        strTableHTML += " </tr>";
+      }
+      strTableHTML += "</table>";
+
+      document.getElementById('tableContent').innerHTML=strTableHTML;
+    }
+
+    function validator()
+    {
+      var validh1 = document.forms["tableForm"]["h1"].value;
+      var validh2 = document.forms["tableForm"]["h2"].value;
+      var validv1 = document.forms["tableForm"]["v1"].value;
+      var validv2 = document.forms["tableForm"]["v2"].value;
+      var strErrorText = "---ERROR---";
+
+      <!-- If there are any errors, the string will be appended to strErrorText. -->
+
+      if ((parseInt(validh1) > parseInt(validh2)) && (isNumeric(validh1)) && (isNumeric(validh2))) 
+      {
+        strErrorText += "\n-Row Start should be less than or equal to Row End";
+      }
+
+      if ((parseInt(validv1) > parseInt(validv2)) && (isNumeric(validv1)) && (isNumeric(validv2))) 
+      {
+        strErrorText += "\n-Column Start should be less than or equal to Column End";
+      }
+
+      if (!isNumeric(validh1)) 
+      {
+        strErrorText += "\n-Row Start field must be filled with a numeric value, invalid entry '" + validh1 + "'.";
+      }
+
+      if (!isNumeric(validh2)) 
+      {
+        strErrorText += "\n-Row End field must be filled with a numeric value, invalid entry '" + validh2 + "'.";
+      }
+
+      if (!isNumeric(validv1)) 
+      {
+        strErrorText += "\n-Column Start field must be filled with a numeric value, invalid entry '" + validv1 + "'.";
+      }
+
+      if (!isNumeric(validv2)) 
+      {
+        strErrorText += "\n-Column End field must be filled with a numeric value, invalid entry '" + validv2 + "'.";
+      }
+
+      <!-- if this statement is true, strErrorText hasn't changed, there aren't any errors. Return true and continue with submission. -->
+      if (strErrorText == "---ERROR---") return true;
+      
+      else
+      {
+      alert(strErrorText);
+      
+      return false;
+      }
+      }
+      
+  </script> 
+</head>
+
+<!-- As soon as page loads, populate table based on URL if there is data to parse. The generateTable returns if the URL is void of any form data. -->
+<body onload="generateTable()">
+  
+  <a href="GUI_A2.html">Back to home...</a>  
+  
+  <div class="centerContent">
+    <h1 class="solidBorder">Corey Prak, Assignment 5: Creating a Dynamic Table</h1>
+    
+    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fweblab.cs.uml.edu%2F~cprak%2FGUI_A5.html">HTML5</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS3</a> validated!
+  </div>
+  
+  <div class="formCenter">
+      <form name="tableForm" method="GET" action="GUI_A5.html" onsubmit="return validator()">
+        <table>
+          <tr>
+            <td>Row Start:</td>
+            <td><input type="text" name="h1" id='h1'></td>
+          </tr>
+          <tr>
+            <td>Row End:</td>
+            <td><input type="text" name="h2" id='h2'></td>      
+          </tr>
+          <tr>
+            <td>Column Start:</td>
+            <td><input type="text" name="v1" id='v1'></td>
+          </tr>
+          <tr>
+            <td>Column End:</td>
+            <td><input type="text" name="v2" id='v2'></td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Generate Table"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    
+    <div id="tableContent"></div>
+    
+</body>
+</html>
