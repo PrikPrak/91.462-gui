@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
 <!--
-  File: GUI_A5.html  
-  91.461 Assignment 5: Creating a Dynamic Table
+
+  91.461 Assignment 6: Creating a Dynamic Table With JQuery Validation
   Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
   Copyright (c) 2013 by Corey Prak.  All rights reserved.
-  Updated by CP on October 19, 2013
-  Created by CP on October 20, 2013
+  Created by CP on November 7th, 2013
 
   NOTES:
   
@@ -29,12 +28,12 @@
   Knowledge of Javascript tables. 
 -->
 
-<title>Corey Prak, GUI Assignment 5</title>
+<title>Corey Prak, GUI Assignment 6</title>
   <!-- <meta http-equiv="refresh" content="3"> -->
 
-  <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="../../css/styles.css">
 
-  <script src="js/formutilities.js"></script>
+<script src="js/formutilities.js"></script>
 
   <script type="text/javascript">
 
@@ -152,16 +151,16 @@
 <!-- As soon as page loads, populate table based on URL if there is data to parse. The generateTable returns if the URL is void of any form data. -->
 <body onload="generateTable()">
   
-  <a href="GUI_A2.html">Back to home...</a>  
+<a href="../../index.html">Back to main page...</a>
   
   <div class="centerContent">
-    <h1 class="solidBorder">Corey Prak, Assignment 5: Creating a Dynamic Table</h1>
+    <h1 class="solidBorder">Corey Prak, Assignment 6: Creating a Dynamic Table</h1>
     
-    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fweblab.cs.uml.edu%2F~cprak%2FGUI_A5.html">HTML5</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS3</a> validated!
+    <a href="">HTML5</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS3</a> validated!
   </div>
   
   <div class="formCenter">
-      <form name="tableForm" method="GET" action="GUI_A5.html" onsubmit="return validator()">
+      <form name="tableForm" method="GET" action="main.html" onsubmit="return validator()">
         <table>
           <tr>
             <td>Row Start:</td>
