@@ -1,0 +1,15 @@
+label.error
+{
+  color: red;
+}
+
+body
+{
+  background-color: #CCFFFF;
+}
+
+table td
+{
+  width: 200px;
+  white-space: nowrap;
+}

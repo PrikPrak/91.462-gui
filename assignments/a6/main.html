@@ -37,16 +37,61 @@
 
 <link rel="stylesheet" href="../../css/styles.css">
 
+<link rel="stylesheet" href="css/styles.css">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script src="js/formutilities.js"></script>
  
-<script src="js/jquery.validate.min.js"</script>
+<script src="js/jquery.validate.min.js"></script>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    var msg = "Hello, World!";
-    $("#testField").html(msg);
+  $(document).ready(function(){
+
+    <!-- Background of active field will become yellow, visually indicating an active field. -->
+    $('input').focusin(function(){
+      $(this).css("background-color", "#FFFFCC");
+    });
+
+    <!-- Background of field leaving focus will return to default white, visually indicating a loss of 'focus' -->
+    $('input').focusout(function(){
+      $(this).css("background-color", "white");
+    });
+
+    
+    var ruleSetReqAndNum = {
+          required: true, 
+          number: true
+        };
+
+    var messageSetReqAndNum = {
+          required: "Field must be completed!", 
+          number: "Please enter a valid number."
+        };
+
+    $('#tableForm').validate({
+
+      rules:{
+        h1: ruleSetReqAndNum, 
+        h2: ruleSetReqAndNum,
+        v1: ruleSetReqAndNum, 
+        v2: ruleSetReqAndNum
+      },
+
+      messages:{
+        h1: messageSetReqAndNum, 
+        h2: messageSetReqAndNum, 
+        v1: messageSetReqAndNum, 
+        v2: messageSetReqAndNum
+      }, 
+
+      errorPlacement: function(error, element){
+        error.appendTo(element.parent().next());
+      }
+
+
+    });
+
   });
 </script>
 
@@ -64,26 +109,31 @@
   </div>
   
   <div class="formCenter">
-      <form name="tableForm" method="GET" action="main.html" onsubmit="return validator()">
+      <form name="tableForm" id="tableForm" method="GET" action="main.html" onsubmit="return drawTable()">
         <table>
           <tr>
             <td>Row Start:</td>
-            <td><input type="text" name="h1" id='h1'></td>
+            <td><input type="text" name="h1" id='h1' class="required number"></td>
+            <td></td>
           </tr>
           <tr>
             <td>Row End:</td>
-            <td><input type="text" name="h2" id='h2'></td>      
+            <td><input type="text" name="h2" id='h2'></td>
+            <td></td>      
           </tr>
           <tr>
             <td>Column Start:</td>
             <td><input type="text" name="v1" id='v1'></td>
+            <td></td>
           </tr>
           <tr>
             <td>Column End:</td>
             <td><input type="text" name="v2" id='v2'></td>
+            <td></td>
           </tr>
           <tr>
             <td><input type="submit" value="Generate Table"></td>
+            <td></td>
           </tr>
         </table>
       </form>
@@ -91,8 +141,5 @@
     
   <div id="tableContent"></div>
     
-  <!-- Testing jQuery  -->
-  <div id="testField">efwefeWFEWFEw</div>
-
 </body>
 </html>
