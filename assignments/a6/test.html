@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+<!--                                                                                                                                       
+  File: __________                                                                                                                         
+  91.461 Assignment __:                                                                                                                    
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu                                                                    
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.                                                                                  
+  Updated by CP on September 12, 2013 at 12:10 PM                                                                                          
+                                                                                                                                           
+  NOTES:                                                                                                                                   
+                                                                                                                                           
+  CREDITS:                                                                                                                                 
+-->
+  <title></title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script src="js/jquery.validate.min.js"></script>
+
+  <script>
+  $(document).ready(function(){
+    $("#formTest").validate({
+
+      rules: {
+        email: {
+          required: true,
+          email: true
+        }
+      }, // End rules.
+
+      messages: {
+        emailAddress: {
+          required: " This field must be completed with a valid email address.",
+          email: " Please enter a valid email address."
+        } 
+      } // End messages.
+
+    });
+  });
+  </script>
+
+  </head>
+
+  <body>
+
+    <form id="formTest" name="formTest" method="GET" action="test.html">
+
+      Email: <input type="text" name="emailAddress"  class="required email"><br> 
+      <input name="numbers" type="submit" value="Submit Data"></input>
+
+    </form>
+
+  </body>
+
+</html>
