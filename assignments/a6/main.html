@@ -82,7 +82,7 @@
       $(this).css("background-color", "white");
     });
 
-    /* Consolidate rules, attempting to follow DRY (Don't Repeat Yourself). */    
+    /* Consolidate rules, attempting adhere to DRY (Don't Repeat Yourself). */    
     var ruleReqNum = {
           required: true, 
           number: true,
@@ -143,12 +143,66 @@
     });
 
   });
-</script>
 
+  function isNumeric(num)
+  {
+    return !isNaN(parseFloat(num)) && isFinite(num);
+  }
+
+  function generateTable()
+  {
+    var strTest = document.URL;
+    var strTableHTML = "";
+    var intRVal1 = getParameter("h1");
+    var intRVal2 = getParameter("h2");
+    var intCVal1 = getParameter("v1");
+    var intCVal2 = getParameter("v2");
+    var intRIter = 0;
+    var intCIter = 0;
+
+    if ((intRVal1 == null) && (intRVal2 == null) && (intCVal1 == null) && (intCVal2 == null)) return;
+
+    strTableHTML += "<table class='center'>"; 
+
+    for(intRIter = (intRVal1 - 1); intRIter <= intRVal2; intRIter++)
+    {
+      strTableHTML += " <tr>";
+      for(intCIter = (intCVal1 - 1); intCIter <= intCVal2; intCIter++)
+      {
+        <!-- If block which populates entire left column. -->
+        if (intCIter == (intCVal1 - 1))
+        {
+        <!-- Creates an empty cell on the top left part of the table. -->
+          if (intRIter == (intRVal1 - 1))
+          strTableHTML += "<td>" + "&nbsp;"  + "</td>";
+          
+        <!-- Fills other cells in the column with the appropriate value. -->
+          else strTableHTML += "<td class='column'>" + intRIter + "</td>"; 
+        }
+       
+        <!-- If block which populates entire first row. -->
+        else if (intRIter == (intRVal1 - 1))
+        {
+          strTableHTML += "<td class='row'>" + intCIter + "</td>";            
+        }
+
+        <!-- Populates remaining cells with the product of the row and column. -->
+        else
+        {
+          strTableHTML += "<td class='cell'>" + (intCIter * intRIter) + "</td>";
+        }
+      }
+      strTableHTML += " </tr>";
+    }
+    strTableHTML += "</table>";
+
+    document.getElementById('tableContent').innerHTML=strTableHTML;
+  }
+
+</script>
 </head>
 
-<body>
-  
+<body onload="generateTable()">  
   <a href="../../index.html">Back to main page...</a>
   
   <div class="centerContent">
@@ -158,37 +212,37 @@
   </div>
   
   <div class="formCenter">
-      <form name="tableForm" id="tableForm" method="GET" action="main.html" onsubmit="return generateTable()">
-        <table>
-          <tr>
-            <td>* Row Start:</td>
-            <td><input type="text" name="h1" id='h1' class="required number"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>* Row End:</td>
-            <td><input type="text" name="h2" id='h2'></td>
-            <td></td>      
-          </tr>
-          <tr>
-            <td>* Column Start:</td>
-            <td><input type="text" name="v1" id='v1'></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>* Column End:</td>
-            <td><input type="text" name="v2" id='v2'></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><input type="submit" value="Generate Table"></td>
-            <td><sup>* = Required</sup></td>
-          </tr>
-        </table>
-      </form>
-    </div>
+    <form name="tableForm" id="tableForm" method="GET" action="main.html">
+      <table>
+        <tr>
+          <td>* Row Start:</td>
+          <td><input type="text" name="h1" id='h1'></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>* Row End:</td>
+          <td><input type="text" name="h2" id='h2'></td>
+          <td></td>      
+        </tr>
+        <tr>
+          <td>* Column Start:</td>
+          <td><input type="text" name="v1" id='v1'></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>* Column End:</td>
+          <td><input type="text" name="v2" id='v2'></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Generate Table"></td>
+          <td><sup>* = Required</sup></td>
+        </tr>
+      </table>
+    </form>
+  </div>
     
   <div id="tableContent"></div>
-    
 </body>
+
 </html>
