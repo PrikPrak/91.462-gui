@@ -1,3 +1,22 @@
+/*
+  File: styles.css  
+  91.461 Assignment 6: Styling Your First Web Page With CSS
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.label.error
+
+  Last Updated by CP on November 17th, 2013
+  Created by CP on November 16th, 2013
+
+  NOTES:
+  
+  The styles contained in this file are exclusive only to Assignment 6 and will not be included in future assignments nor updated unless necessary for this assignment to function.  
+
+  CREDITS:
+  
+  http://stackoverflow.com/questions/6658947/css-table-td-width-fixed-not-flexible
+  Used in the style "table td" to ensure that the text would be displayed horizontally.
+*/
+
 label.error
 {
   color: red;

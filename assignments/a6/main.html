@@ -7,11 +7,31 @@
   91.461 Assignment 6: Creating a Dynamic Table With JQuery Validation
   Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
   Copyright (c) 2013 by Corey Prak.  All rights reserved.
+
+  Last Updated by CP on November 17th, 2013
   Created by CP on November 7th, 2013
 
   NOTES:
+
+  Assignment was really late...
   
   CREDITS:
+
+  http://api.jquery.com/
+  Source of almost all jQuery methods used. 
+
+  http://stackoverflow.com/questions/8829030/jquery-validation-plugin-adding-rules-that-apply-to-multiple-fields
+  Help on how to consolidate jQuery validation plugin  rules and messages.
+
+  http://jqueryvalidation.org/jQuery.validator.addMethod
+  http://randomactsofcoding.blogspot.com/2008/10/starting-with-jquery-how-to-write.html
+  Tips on jQuery validation plugin adding methods. 
+
+  http://api.jquery.com/attr/
+  jQuery .attr() method.
+
+  http://www.w3schools.com/tags/tag_sup.asp
+  Superscript Tag Source
 
   http://jqueryvalidation.org/
   Host for jQuery Valication Plugin which this assignment includes, "jquery.validate.min.js". The location of the plugin file: http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js
@@ -33,32 +53,36 @@
 -->
 
 <title>Corey Prak, GUI Assignment 6</title>
-  <!-- <meta http-equiv="refresh" content="3"> -->
 
+<!-- Include generic styles. -->
 <link rel="stylesheet" href="../../css/styles.css">
 
+<!-- Include custom styles exclusive to this assignment. -->
 <link rel="stylesheet" href="css/styles.css">
 
+<!-- Hosted jQuery file. -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
+<!-- Professor Heines' code. -->
 <script src="js/formutilities.js"></script>
  
+<!-- jQuery Validation code. -->
 <script src="js/jquery.validate.min.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function(){
 
-    <!-- Background of active field will become yellow, visually indicating an active field. -->
+    /* Background of active field will become yellow, visually indicating an active field. */
     $('input').focusin(function(){
       $(this).css("background-color", "#FFFFCC");
     });
 
-    <!-- Background of field leaving focus will return to default white, visually indicating a loss of 'focus' -->
+    /* Background of field leaving focus will return to default white, visually indicating a loss of 'focus' */
     $('input').focusout(function(){
       $(this).css("background-color", "white");
     });
 
-    
+    /* Consolidate rules, attempting to follow DRY (Don't Repeat Yourself). */    
     var ruleReqNum = {
           required: true, 
           number: true,
@@ -75,7 +99,10 @@
           number: "Please enter a valid number."
         };
 
+    /* Custom Validation rule to ensure End fields are always greater than Start fields. */
     jQuery.validator.addMethod("ruleH2GreaterThanH1", function(value, element){
+ 
+                                                        /* Coded to be generic for Column End and Row End fields. Starting val will assign the appropriate h1 or v1 value. */
                                                         var startingVal = 0;
 
                                                         if($(element).attr("name") == 'h2'){
@@ -92,9 +119,9 @@
 
                                                         return true;
                                                       },
-                                                      "End value must be greater than corresponding ystart value.");
-    $('#tableForm').validate({
-
+                                                      "End value must be greater than corresponding start value.");
+ 
+   $('#tableForm').validate({
       rules:{
         h1: ruleReqNum,
         h2: ruleReqNumEndGreater, 
@@ -109,11 +136,10 @@
         v2: messageReqNum
       }, 
 
+      /* Appends error HTML code to empty column after fields, which makes them display directly to the right of them and not underneath. */
       errorPlacement: function(error, element){
         error.appendTo(element.parent().next());
       }
-
-
     });
 
   });
@@ -121,10 +147,9 @@
 
 </head>
 
-<!-- As soon as page loads, populate table based on URL if there is data to parse. The generateTable returns if the URL is void of any form data. -->
 <body>
   
-<a href="../../index.html">Back to main page...</a>
+  <a href="../../index.html">Back to main page...</a>
   
   <div class="centerContent">
     <h1 class="solidBorder">Corey Prak, Assignment 6: Creating a Dynamic Table</h1>
@@ -133,31 +158,31 @@
   </div>
   
   <div class="formCenter">
-      <form name="tableForm" id="tableForm" method="GET" action="main.html" onsubmit="return drawTable()">
+      <form name="tableForm" id="tableForm" method="GET" action="main.html" onsubmit="return generateTable()">
         <table>
           <tr>
-            <td>Row Start:</td>
+            <td>* Row Start:</td>
             <td><input type="text" name="h1" id='h1' class="required number"></td>
             <td></td>
           </tr>
           <tr>
-            <td>Row End:</td>
+            <td>* Row End:</td>
             <td><input type="text" name="h2" id='h2'></td>
             <td></td>      
           </tr>
           <tr>
-            <td>Column Start:</td>
+            <td>* Column Start:</td>
             <td><input type="text" name="v1" id='v1'></td>
             <td></td>
           </tr>
           <tr>
-            <td>Column End:</td>
+            <td>* Column End:</td>
             <td><input type="text" name="v2" id='v2'></td>
             <td></td>
           </tr>
           <tr>
             <td><input type="submit" value="Generate Table"></td>
-            <td></td>
+            <td><sup>* = Required</sup></td>
           </tr>
         </table>
       </form>
