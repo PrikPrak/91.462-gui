@@ -59,30 +59,44 @@
     });
 
     
-    var ruleSetReqAndNum = {
+    var ruleReqNum = {
           required: true, 
-          number: true
+          number: true,
         };
 
-    var messageSetReqAndNum = {
+    var ruleReqNumEndGreater = {
+        required: true, 
+        number: true,
+        ruleH2GreaterThanH1: true
+      };
+
+    var messageReqNum = {
           required: "Field must be completed!", 
           number: "Please enter a valid number."
         };
 
+    jQuery.validator.addMethod("ruleH2GreaterThanH1", function(value, element){
+                                                        var startingVal = $('#h1').val();
+                                                        if ( parseInt(startingVal) > parseInt(value)){
+                                                          return false;  
+                                                        };
+                                                        return true;
+                                                      },
+                                                      "Row End value must be greater than Row Start Value");
     $('#tableForm').validate({
 
       rules:{
-        h1: ruleSetReqAndNum, 
-        h2: ruleSetReqAndNum,
-        v1: ruleSetReqAndNum, 
-        v2: ruleSetReqAndNum
+        h1: ruleReqNum,
+        h2: ruleReqNumEndGreater 
+        v1: ruleReqNum, 
+        v2: ruleReqNum,
       },
 
       messages:{
-        h1: messageSetReqAndNum, 
-        h2: messageSetReqAndNum, 
-        v1: messageSetReqAndNum, 
-        v2: messageSetReqAndNum
+        h1: messageReqNum, 
+        h2: messageReqNum,
+        v1: messageReqNum, 
+        v2: messageReqNum
       }, 
 
       errorPlacement: function(error, element){
