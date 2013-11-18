@@ -76,20 +76,30 @@
         };
 
     jQuery.validator.addMethod("ruleH2GreaterThanH1", function(value, element){
-                                                        var startingVal = $('#h1').val();
-                                                        if ( parseInt(startingVal) > parseInt(value)){
+                                                        var startingVal = 0;
+
+                                                        if($(element).attr("name") == 'h2'){
+                                                          startingVal = $('#h1').val();
+                                                        }
+
+                                                        else if($(element).attr("name") == 'v2'){
+                                                          startingVal = $('#v1').val();
+                                                        }
+
+                                                        if (parseInt(startingVal) > parseInt(value)){
                                                           return false;  
-                                                        };
+                                                        }
+
                                                         return true;
                                                       },
-                                                      "Row End value must be greater than Row Start Value");
+                                                      "End value must be greater than corresponding ystart value.");
     $('#tableForm').validate({
 
       rules:{
         h1: ruleReqNum,
-        h2: ruleReqNumEndGreater 
+        h2: ruleReqNumEndGreater, 
         v1: ruleReqNum, 
-        v2: ruleReqNum,
+        v2: ruleReqNumEndGreater,
       },
 
       messages:{
