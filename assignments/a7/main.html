@@ -20,9 +20,18 @@
   (description)
 -->
     <title>Graphing Calculator</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjs/0.15.0/math.min.js">    </script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/math.min.js"></script>
+    <script src="js/graph.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        graph();
+      });
+    </script>
   </head>
   <body>
+    <input id="inputField"> 
     <canvas width=200 height=200 id="myCanvas"></canvas>
   </body>
 </html>
