@@ -37,6 +37,9 @@ function graph(){
   initTextField();
   startAnimation();
 
+  // CP
+  drawTicks();
+
   // Update math expression from the has value found in the URL.
   // Uses default if there isn't one. 
   window.addEventListener('hashchange', setExprFromHash);
@@ -96,6 +99,8 @@ function graph(){
 
          xPixel = percentX * canvas.width; 
          yPixel = percentY * canvas.width;
+
+
          c.lineTo(xPixel, yPixel);
      }
 
@@ -134,6 +139,9 @@ function graph(){
 
     //redraw
     drawCurve();
+
+    
+    drawTicks();
   }
 
   // Gets the fragment identifier value.
@@ -141,8 +149,77 @@ function graph(){
     return location.hash.substr(1);
   }
 
-  // Sets the g
+  // Sets the fragment identifier value.
   function setHashValue(value){
     return location.hash = value;
   }
+
+  function drawTicks(){
+
+    // These are used inside of the following for loop.
+    var i, 
+
+    // These vary between xMin/xMax and yMin/yMax.
+    xPixel, yPixel, 
+
+    // These vary between 0 and 1.    
+    percentX, percentY,
+
+    // These are in math coordinates.
+    mathX, mathY;
+
+    c.beginPath();
+
+    // Draw border around graph.
+    c.moveTo(0, 0);
+    c.moveTo(canvas.width, 0);
+    c.moveTo(0, canvas.height);
+
+    // Draw X and Y lines. 
+    c.moveTo(0, (canvas.height/2));
+    c.lineTo(canvas.width, (canvas.height/2));
+
+    c.moveTo((canvas.width/2), 0);
+    c.lineTo((canvas.width/2), canvas.height);
+
+    c.moveTo(0, (canvas.height)/2);
+    c.lineTo(canvas.width, (canvas.height)/2);
+
+
+  
+    //for (i = 0; i < n; i++){  
+
+      // Simple fraction which determines the "intervals" at 
+      // which points will be drawn to/from. Larger n values 
+      // means more points means, which means more lines drawn, 
+      // ultimately resulting in a more accurate drawing. The (n-1)
+      // ensures that we are able to get to 1, which is a problem
+      // due to the need for i to start at 0.
+      percentX = i / (n - 1);
+
+      // Computes where the point on the X plane should be
+      // based on the "intervals" given by percentX, and the
+      // given ranges which come from xMin and xMax. 
+      mathX = percentX * (xMax - xMin) + xMin;
+
+     //     // User input accepted here
+     //     mathY = evaluateMathExpr(mathX);
+
+     //     percentY = (mathY - yMin) / (yMax - yMin);
+
+
+     // Flip to match canvas coordinates, as 0,0 is top left.
+     percentY = 1 - percentY;
+
+     // Points Of the X and Y percentages (based on ranges x/y Min/Max, 
+     // in proportion to the size of the "canvas". Makes drawings 
+     // to scale, pretty nifty! 
+     xPixel = percentX * canvas.width; 
+     yPixel = percentY * canvas.width;
+
+     //}    
+
+     c.stroke();
+  }
 }
+
