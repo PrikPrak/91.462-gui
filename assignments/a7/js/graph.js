@@ -162,20 +162,15 @@ function graph(){
     var i, j, interval,
 
     // These vary between xMin/xMax and yMin/yMax.
-    xPixel, yPixel, 
+    xPixel, intervalPixel, 
 
     // These vary between 0 and 1.    
-    percentX, percentY,
+    percentX, percentY;
 
-    // These are in math coordinates.
-    mathX, mathY;
-
+    textC.fillStyle = "black";
+    textC.font = "bold 10px Arial";
+ 
     c.beginPath();
-
-    // Draw border around graph.
-    c.moveTo(0, 0);
-    c.moveTo(canvas.width, 0);
-    c.moveTo(0, canvas.height);
 
     // Draw X and Y lines. 
     c.moveTo(0, (canvas.height/2));
@@ -190,54 +185,58 @@ function graph(){
     j = 0;
 
     for (i = xMin; i < xMax; i++){  
+  
+      // This will be used as an interval based on the given ranges for x.
+      interval = j / (xMax - xMin);
 
-      // Simple fraction which determines the "intervals" at 
-      // which points will be drawn to/from. Larger n values 
-      // means more points means, which means more lines drawn, 
-      // ultimately resulting in a more accurate drawing. The (n-1)
-      // ensures that we are able to get to 1, which is a problem
-      // due to the need for i to start at 0.
-      percentX = j / (xMax - xMin);
-      percentY = ((yMax - yMin) - 1) / (yMax - yMin);
+      // Computes the "length" of the interval, this is how
+      singleIntervalLength = ((yMax - yMin) - 1) / (yMax - yMin);
+      
+      // Flip!
+      singleIntervalLength = 1 - singleIntervalLength;
 
-      // Computes where the point on the X plane should be
-      // based on the "intervals" given by percentX, and the
-      // given ranges which come from xMin and xMax. 
-      mathX = percentX * (xMax - xMin) + xMin;
+      // Of the interval and a single "length" of one, find   
+      pixelPos = interval * canvas.width; 
+      intervalPixel = singleIntervalLength * canvas.width;
 
-      mathY = percentY * (yMax - yMin) + yMin;
+      c.moveTo(pixelPos, canvas.width/2);
+      c.lineTo(pixelPos, ((canvas.width/2) + (intervalPixel/2)));
 
-     //     // User input accepted here
-     //     mathY = evaluateMathExpr(mathX);
+      if (i != 0){
+        textC.fillText(i, pixelPos, (canvas.height/2) + intervalPixel);
+      }
 
-     //     percentY = (mathY - yMin) / (yMax - yMin);
+      j++;
+    }    
 
+    j = 0;
 
-     // Flip to match canvas coordinates, as 0,0 is top left.
-     percentY = 1 - percentY;
+    for (i = yMin; i < yMax; i++){  
+  
+      // This will be used as an interval based on the given ranges for x.
+      interval = j / (yMax - yMin);
 
-     // Points Of the X and Y percentages (based on ranges x/y Min/Max, 
-     // in proportion to the size of the "canvas". Makes drawings 
-     // to scale, pretty nifty! 
-     xPixel = percentX * canvas.width; 
-     yPixel = percentY * canvas.width;
+      // Computes the "length" of the interval, this is how
+      singleIntervalLength = ((yMax - yMin) - 1) / (yMax - yMin);
 
-     c.moveTo(xPixel, canvas.width/2);
-     c.lineTo(xPixel, ((canvas.width/2) + (yPixel/2)));
+      // Flip!
+      singleIntervalLength = 1 - singleIntervalLength;
 
-     textC.fillStyle = "black";
-     textC.font = "bold 10px Arial";
-     textC.fillText(i, xPixel, (canvas.width/2) + yPixel);
+      // Of the interval and a single "length" of one, find   
+      pixelPos = interval * canvas.height; 
+      intervalPixel = singleIntervalLength * canvas.height;
 
-     c.moveTo(canvas.width/2, xPixel);
-     c.lineTo((canvas.width/2) + (yPixel/2), xPixel);
+      c.moveTo(canvas.width/2, pixelPos);
+      c.lineTo( (intervalPixel/2) + (canvas.height/2), pixelPos);
 
-     textC.fillText(i, (canvas.width/2) + (yPixel), xPixel);
+      if (i != 0){
+        textC.fillText(i, (canvas.width/2) + intervalPixel, pixelPos);
+      }
 
-     j++;
-     }    
+      j++;
+    }    
 
-     c.stroke();
+    c.stroke();
   }
 }
 
