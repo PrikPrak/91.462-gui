@@ -142,7 +142,6 @@ function graph(){
     //redraw
     drawCurve();
 
-    
     drawTicks();
   }
 
@@ -168,7 +167,7 @@ function graph(){
     percentX, percentY;
 
     textC.fillStyle = "black";
-    textC.font = "bold 10px Arial";
+    textC.font = "bold 12px Arial";
  
     c.beginPath();
 
@@ -184,7 +183,7 @@ function graph(){
 
     j = 0;
 
-    for (i = xMin; i < xMax; i++){  
+    for (i = xMin; i <= xMax; i++){  
   
       // This will be used as an interval based on the given ranges for x.
       interval = j / (xMax - xMin);
@@ -200,10 +199,10 @@ function graph(){
       intervalPixel = singleIntervalLength * canvas.width;
 
       c.moveTo(pixelPos, canvas.width/2);
-      c.lineTo(pixelPos, ((canvas.width/2) + (intervalPixel/2)));
+      c.lineTo(pixelPos, ((canvas.width/2) + (intervalPixel/3)));
 
       if (i != 0){
-        textC.fillText(i, pixelPos, (canvas.height/2) + intervalPixel);
+        textC.fillText(i, pixelPos, (canvas.height/2) + ((intervalPixel/2) + 4));
       }
 
       j++;
@@ -211,7 +210,7 @@ function graph(){
 
     j = 0;
 
-    for (i = yMin; i < yMax; i++){  
+    for (i = yMin; i <= yMax; i++){  
   
       // This will be used as an interval based on the given ranges for x.
       interval = j / (yMax - yMin);
@@ -227,10 +226,10 @@ function graph(){
       intervalPixel = singleIntervalLength * canvas.height;
 
       c.moveTo(canvas.width/2, pixelPos);
-      c.lineTo( (intervalPixel/2) + (canvas.height/2), pixelPos);
+      c.lineTo( (intervalPixel/3) + (canvas.height/2), pixelPos);
 
       if (i != 0){
-        textC.fillText(i, (canvas.width/2) + intervalPixel, pixelPos);
+        textC.fillText((i * -1), (canvas.width/2) + (intervalPixel/3), pixelPos + 7);
       }
 
       j++;
