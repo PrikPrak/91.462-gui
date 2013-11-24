@@ -1,0 +1,48 @@
+  function drawTicks(){
+
+    // These are used inside of the following for loop.
+    var i, interval, j,
+
+    // These vary between xMin/xMax and yMin/yMax.
+    xPixel, yPixel, 
+
+    // These vary between 0 and 1.    
+    nInterval, percentY,
+
+    // These are in math coordinates.
+    mathX, mathY;
+
+    c.beginPath();
+
+    // Draw border around graph.
+    c.moveTo(0, 0);
+    c.moveTo(canvas.width, 0);
+    c.moveTo(0, canvas.height);
+
+    // Draw X and Y lines. 
+    c.moveTo(0, (canvas.height/2));
+    c.lineTo(canvas.width, (canvas.height/2));
+
+    c.moveTo((canvas.width/2), 0);
+    c.lineTo((canvas.width/2), canvas.height);
+
+    c.moveTo(0, (canvas.height)/2);
+    c.lineTo(canvas.width, (canvas.height)/2);
+  
+    for (i = xMin; i < xMax; i++){  
+     
+      interval = j / ((xMax - xMin) - 1);
+
+      // X position, in pixels. 
+      xPixel = interval * canvas.width; 
+
+      c.moveTo(.25 * canvas.width, (canvas.height)/2);
+      c.lineTo(xPixel, (canvas.height)/4);
+      
+      j++;
+      }    
+
+     c.stroke();
+  }
+}
+

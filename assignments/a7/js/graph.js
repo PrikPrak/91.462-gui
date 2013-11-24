@@ -157,7 +157,7 @@ function graph(){
   function drawTicks(){
 
     // These are used inside of the following for loop.
-    var i, 
+    var i, j, interval,
 
     // These vary between xMin/xMax and yMin/yMax.
     xPixel, yPixel, 
@@ -185,9 +185,9 @@ function graph(){
     c.moveTo(0, (canvas.height)/2);
     c.lineTo(canvas.width, (canvas.height)/2);
 
+    j = 0;
 
-  
-    //for (i = 0; i < n; i++){  
+    for (i = xMin; i < xMax; i++){  
 
       // Simple fraction which determines the "intervals" at 
       // which points will be drawn to/from. Larger n values 
@@ -195,12 +195,15 @@ function graph(){
       // ultimately resulting in a more accurate drawing. The (n-1)
       // ensures that we are able to get to 1, which is a problem
       // due to the need for i to start at 0.
-      percentX = i / (n - 1);
+      percentX = j / (xMax - xMin);
+      percentY = ((yMax - yMin) - 1) / (yMax - yMin);
 
       // Computes where the point on the X plane should be
       // based on the "intervals" given by percentX, and the
       // given ranges which come from xMin and xMax. 
       mathX = percentX * (xMax - xMin) + xMin;
+
+      mathY = percentY * (yMax - yMin) + yMin;
 
      //     // User input accepted here
      //     mathY = evaluateMathExpr(mathX);
@@ -217,7 +220,14 @@ function graph(){
      xPixel = percentX * canvas.width; 
      yPixel = percentY * canvas.width;
 
-     //}    
+     c.moveTo(xPixel, canvas.width/2);
+     c.lineTo(xPixel, ((canvas.width/2) + (yPixel/2)));
+
+     c.moveTo(canvas.width/2, xPixel);
+     c.lineTo((canvas.width/2) + (yPixel/2), xPixel);
+
+     j++;
+     }    
 
      c.stroke();
   }
