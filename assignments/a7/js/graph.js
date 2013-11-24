@@ -1,6 +1,8 @@
 function graph(){
   var canvas = document.getElementById('myCanvas'), 
       c = canvas.getContext('2d'), 
+  
+      textC = canvas.getContext('2d'),
 
       // 'n' Represents the number of line segments.
       n = 100, 
@@ -223,8 +225,14 @@ function graph(){
      c.moveTo(xPixel, canvas.width/2);
      c.lineTo(xPixel, ((canvas.width/2) + (yPixel/2)));
 
+     textC.fillStyle = "black";
+     textC.font = "bold 10px Arial";
+     textC.fillText(i, xPixel, (canvas.width/2) + yPixel);
+
      c.moveTo(canvas.width/2, xPixel);
      c.lineTo((canvas.width/2) + (yPixel/2), xPixel);
+
+     textC.fillText(i, (canvas.width/2) + (yPixel), xPixel);
 
      j++;
      }    
