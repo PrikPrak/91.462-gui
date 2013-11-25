@@ -2,28 +2,36 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="3">
 <!--
   91.461 Assignment 7: Creating a Graphing Calculator Using the HTML Canvas
   Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
   Copyright (c) 2013 by Corey Prak.  All rights reserved.
 
   Created by CP on November 19th, 2013
-  Last Updated by CP on November 19th, 2013
+  Last Updated by CP on November 24th, 2013
+  Updated by CP on November 19th, 2013
 
   NOTES:
 
-  (date - text)
+  Horribly coded, I would have liked to make this more modular instead of 
+  statically declaring certain aspects of the canvas, such as number labels.
 
   CREDITS:
+  
+  http://www.w3schools.com/tags/att_input_size.asp
+  Modify size of text input size.
 
-  (link)
-  (description)
+  http://net.tutsplus.com/tutorials/html-css-techniques/the-easiest-way-to-create-vertical-text-with-css/
+  Ideas to vertically print text.
+
+  http://www.w3schools.com/css/css3_borders.asp
+  How to create borders in CSS. 
 -->
     <title>Graphing Calculator</title>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/math.min.js"></script>
     <script src="js/graph.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
 
     <script>
       $(document).ready(function(){
@@ -32,7 +40,24 @@
     </script>
   </head>
   <body>
-    <input id="inputField"> 
-    <canvas width=500 height=500 id="myCanvas"></canvas>
+    <div class="centerText">
+      <a href="../../index.html">Back to Home...</a>
+
+      <h1>Assignment 7: Creating a Graphing Calculator Using the HTML Canvas </h1>
+
+      <p>
+        <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fweblab.cs.uml.edu%2F~cprak%2FGUI_A5.html">HTML5</a> 
+        +
+        <a href="http://jigsaw.w3.org/css-validator/check/referer\">CSS3</a> validated!
+      </p>
+
+      Corey Prak, corey_prak@student.uml.edu
+    </div>
+
+    <div>
+      Enter function in text field provided below in terms of x or t (time):
+      <input id="inputField">
+      <canvas width=500 height=500 id="myCanvas"></canvas>
+    </div>
   </body>
 </html>

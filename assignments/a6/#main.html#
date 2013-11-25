@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!--
+
+      91.461 Assignment 6: Using the jQuery Validation Plugin with Your Dynamic Table
+      Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+      Copyright (c) 2013 by Corey Prak.  All rights reserved.
+
+      Last Updated by CP on November 17th, 2013
+      Created by CP on November 7th, 2013
+
+      NOTES:
+
+      Assignment was really late, and took way too long to compelte...
+
+      CREDITS:
+
+      http://api.jquery.com/
+      Source of almost all jQuery methods used. 
+
+      http://stackoverflow.com/questions/8829030/jquery-validation-plugin-adding-rules-that-apply-to-multiple-fields
+      Help on how to consolidate jQuery validation plugin  rules and messages.
+
+      http://jqueryvalidation.org/jQuery.validator.addMethod
+      http://randomactsofcoding.blogspot.com/2008/10/starting-with-jquery-how-to-write.html
+      Tips on jQuery validation plugin adding methods. 
+
+      http://api.jquery.com/attr/
+      jQuery .attr() method.
+
+      http://www.w3schools.com/tags/tag_sup.asp
+      Superscript Tag Source
+
+      http://jqueryvalidation.org/
+      Host for jQuery Valication Plugin which this assignment includes, "jquery.validate.min.js". The location of the plugin file: http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js
+
+      https://teaching.cs.uml.edu/~heines/91.461/91.461-2012-13f/461-assn/formutilities.js
+      Jesse Heines, for allowing me to use his Javascript file, which I have inluded in my js directory as formutilities.js
+
+      http://www.w3schools.com/js/js_popup.asp
+      Popup used for debugging.
+
+      http://stackoverflow.com/questions/9716468/is-there-any-function-like-isnumeric-in-javascript-to-validate-numbers
+      Javascript function isNumeric is credited to user Sudhir of StackOverflow.
+
+      http://www.w3schools.com/js/js_form_validation.asp
+      Javascript form validation information.
+
+      http://www.w3schools.com/html/html_tables.asp
+      Knowledge of Javascript tables. 
+    -->
+
+    <title>Corey Prak, GUI Assignment 6</title>
+
+    <!-- Include generic styles. -->
+    <link rel="stylesheet" href="../../css/styles.css">
+
+    <!-- Include custom styles exclusive to this assignment. -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Hosted jQuery file. -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Professor Heines' code. -->
+    <script src="js/formutilities.js"></script>
+
+    <!-- jQuery Validation code. -->
+    <script src="js/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        /* Background of active field will become yellow, visually indicating an active field. */
+        $('input').focusin(function(){
+          $(this).css("background-color", "#FFFFCC");
+        });
+
+        /* Background of field leaving focus will return to default white, visually indicating a loss of 'focus' */
+        $('input').focusout(function(){
+          $(this).css("background-color", "white");
+        });
+
+        /* Consolidate rules, attempting adhere to DRY (Don't Repeat Yourself). */    
+        var ruleReqNum = {
+              required: true, 
+              number: true,
+            };
+
+        var ruleReqNumEndGreater = {
+            required: true, 
+            number: true,
+            ruleH2GreaterThanH1: true
+          };
+
+        var messageReqNum = {
+              required: "Field must be completed!", 
+              number: "Please enter a valid number."
+            };
+
+        /* Custom Validation rule to ensure End fields are always greater than Start fields. */
+        jQuery.validator.addMethod("ruleH2GreaterThanH1", function(value, element){
+
+                                                            /* Coded to be generic for Column End and Row End fields. Starting val will assign the appropriate h1 or v1 value. */
+                                                            var startingVal = 0;
+
+                                                            if($(element).attr("name") == 'h2'){
+                                                              startingVal = $('#h1').val();
+                                                            }
+
+                                                            else if($(element).attr("name") == 'v2'){
+                                                              startingVal = $('#v1').val();
+                                                            }
+
+                                                            if (parseInt(startingVal) > parseInt(value)){
+                                                              return false;  
+                                                            }
+
+                                                            return true;
+                                                          },
+                                                          "End value must be greater than corresponding start value.");
+
+       $('#tableForm').validate({
+          rules:{
+            h1: ruleReqNum,
+            h2: ruleReqNumEndGreater, 
+            v1: ruleReqNum, 
+            v2: ruleReqNumEndGreater,
+          },
+
+          messages:{
+            h1: messageReqNum, 
+            h2: messageReqNum,
+            v1: messageReqNum, 
+            v2: messageReqNum
+          }, 
+
+          /* Appends error HTML code to empty column after fields, which makes them display directly to the right of them and not underneath. */
+          errorPlacement: function(error, element){
+            error.appendTo(element.parent().next());
+          }
+        });
+
+      });
+
+      function isNumeric(num)
+      {
+        return !isNaN(parseFloat(num)) && isFinite(num);
+      }
+
+      function generateTable()
+      {
+        var strTest = document.URL;
+        var strTableHTML = "";
+        var intRVal1 = getParameter("h1");
+        var intRVal2 = getParameter("h2");
+        var intCVal1 = getParameter("v1");
+        var intCVal2 = getParameter("v2");
+        var intRIter = 0;
+        var intCIter = 0;
+
+        if ((intRVal1 == null) && (intRVal2 == null) && (intCVal1 == null) && (intCVal2 == null)) return;
+
+        strTableHTML += "<table class='center'>"; 
+
+        for(intRIter = (intRVal1 - 1); intRIter <= intRVal2; intRIter++)
+        {
+          strTableHTML += " <tr>";
+          for(intCIter = (intCVal1 - 1); intCIter <= intCVal2; intCIter++)
+          {
+            <!-- If block which populates entire left column. -->
+            if (intCIter == (intCVal1 - 1))
+            {
+            <!-- Creates an empty cell on the top left part of the table. -->
+              if (intRIter == (intRVal1 - 1))
+              strTableHTML += "<td>" + "&nbsp;"  + "</td>";
+
+            <!-- Fills other cells in the column with the appropriate value. -->
+              else strTableHTML += "<td class='column'>" + intRIter + "</td>"; 
+            }
+
+            <!-- If block which populates entire first row. -->
+            else if (intRIter == (intRVal1 - 1))
+            {
+              strTableHTML += "<td class='row'>" + intCIter + "</td>";            
+            }
+
+            <!-- Populates remaining cells with the product of the row and column. -->
+            else
+            {
+              strTableHTML += "<td class='cell'>" + (intCIter * intRIter) + "</td>";
+            }
+          }
+          strTableHTML += " </tr>";
+        }
+        strTableHTML += "</table>";
+
+        document.getElementById('tableContent').innerHTML=strTableHTML;
+      }
+
+    </script>
+  </head>
+
+  <body onload="generateTable()">  
+    <a href="../../index.html">Back to main page...</a>
+
+    <div class="centerContent">
+      <h1 class="solidBorder">Corey Prak, Assignment 6: Creating a Dynamic Table</h1>
+
+      <a href="http://validator.w3.org/check?uri=referer">HTML5</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS3</a> validated!
+    </div>
+
+    <div class="formCenter">
+      <form name="tableForm" id="tableForm" method="GET" action="main.html">
+        <table>
+          <tr>
+            <td>* Row Start:</td>
+            <td><input type="text" name="h1" id='h1'></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>* Row End:</td>
+            <td><input type="text" name="h2" id='h2'></td>
+            <td></td>      
+          </tr>
+          <tr>
+            <td>* Column Start:</td>
+            <td><input type="text" name="v1" id='v1'></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>* Column End:</td>
+            <td><input type="text" name="v2" id='v2'></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Generate Table"></td>
+            <td><sup>* = Required</sup></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <div id="tableContent"></div>
+  </body>
+
+</html>
