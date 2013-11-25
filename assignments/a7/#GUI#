@@ -1,0 +1,47 @@
+console.log("Hello");
+
+var x; 
+var y;
+
+var canvas = document.getElementById('myCanvas'),
+    c = canvas.getContext('2d'), 
+    
+    // 'n' is the number of line segments.
+    n = 10, 
+    
+    //define the math "window".
+    xMin = -10, 
+    xMax = 10, 
+    yMin = -10, 
+    yMax = 10;
+
+
+drawCurve();
+
+function drawCurve()
+{  
+  var i, xPixel, yPixel,
+      
+      percentX, percentY, 
+      
+      mathX, mathY;
+
+  c.beginpath();
+  
+  for(i = 0; i < n; i++)
+  {
+    percentX = i / (n - 1);  
+    mathX = percentX * (xMax - xMin) + xMin;
+    
+    mathY = Math.sin(mathX);
+    
+    percentY = (mathY - yMin) / (yMax - yMin);
+    console.log(percentY);
+  
+    xPixel = percentX * canvas.width;
+    yPixel = percentY * canvas.height;
+    c.lineTo(xPixel, yPixel);
+  }
+
+  c.stroke();
+}
