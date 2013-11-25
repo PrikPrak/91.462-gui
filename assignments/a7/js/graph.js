@@ -10,9 +10,10 @@
   NOTES:
 
   Much credits to Curran Kelleher for more than half of the contributing code
-  for the assignment. 
+  for the assignment. More information can be found here:
+  https://github.com/curran/screencasts/tree/gh-pages/grapher
 
-  Major changes added on to Curran's code is found in the function drawTicks().
+  Major changes added on to Curran's code is found in the function drawGraphLabels().
 
   CREDITS:
 
@@ -168,7 +169,7 @@ function graph(){
     drawCurve();
 
     // This is my "hook", where my additions are called within this function.
-    drawTicks();
+    drawGraphLabels();
   }
 
   // Gets the fragment identifier value.
@@ -181,7 +182,7 @@ function graph(){
     return location.hash = value;
   }
 
-  function drawTicks(){
+  function drawGraphLabels(){
 
     // These are used inside of the following for loop.
     var i, j, interval,
@@ -241,6 +242,11 @@ function graph(){
         textC.fillText(i, pixelPos, (canvas.height/2) + ((intervalPixel/2) + 4));
       }
 
+      // Hard code a position to label the axis. Will stay somewhat proportionate..
+      if (i == xMin){
+          textC.fillText("X-Axis", (intervalPixel/4), (canvas.width/2) - (intervalPixel));
+      }
+
       j++;
     }    
 
@@ -278,6 +284,11 @@ function graph(){
       // because this bugs the heck out of me.       
       if (i != 0){
         textC.fillText((i * -1), (canvas.width/2) + (intervalPixel/3), pixelPos + 7);
+      }
+
+      // Hard code a position to label the axis. Will stay somewhat proportionate...
+      if (i == yMin){
+          textC.fillText("Y-Axis", (canvas.width/2) - (intervalPixel * 2), (intervalPixel/2));
       }
 
       j++;
