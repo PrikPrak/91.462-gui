@@ -40,6 +40,7 @@
     </script>
   </head>
   <body>
+
     <div class="centerText">
       <a href="../../index.html">Back to Home...</a>
 
@@ -56,8 +57,13 @@
 
     <div>
       Enter function in text field provided below in terms of x or t (time):
-      <input id="inputField">
+      <form method="post" action="./temp/displaytextfrommain.php">
+        <input type="text" id="inputField" name="inputField">
+        <input type="submit" value="Save Function" name="submit">
+      </form>
+
       <canvas width=500 height=500 id="myCanvas"></canvas>
-    </div>
+    </div>        
+
   </body>
 </html>
