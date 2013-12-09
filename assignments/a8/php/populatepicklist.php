@@ -14,6 +14,9 @@
 
   CREDITS:
 
+  http://www.w3schools.com/php/php_includes.asp
+  How to inlcude and requre PHP code. Useful in refactoring.
+
   (link)
   (description)
 -->

@@ -57,7 +57,7 @@
 
     <div>
       Enter function in text field provided below in terms of x or t (time):
-      <form method="post" action="./temp/displaytextfrommain.php">
+      <form method="post" action="./php/addequationtodatabase.php">
         <input type="text" id="inputField" name="inputField">
         <input type="submit" value="Save Function" name="submit">
       </form>
