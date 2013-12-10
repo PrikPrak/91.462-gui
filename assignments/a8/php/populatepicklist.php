@@ -48,10 +48,10 @@
          echo "<select id='equationPicklist'>";
          
          while ( $row = mysql_fetch_row( $result ) ) {
-         echo "<option value='" . $k . "'>";
+         # echo "<option value='" . $k . "'>";
          
          for ( $k = 0 ; $k < mysql_num_fields( $result ) ; $k++ ) {
-           echo $row[ $k ];
+           echo "<option value='" . $row[ $k ] . "'>" . $row[ $k ];
          }
                              
          echo "</option>";

@@ -58,8 +58,17 @@
             $("#message").html("ERROR: Invalid function, cannot be saved");
             event.preventDefault();
           }
-
         });
+
+        $("#equationPicklist").change(function(){
+          selection = $("#equationPicklist").val();
+
+          $("#inputField").val(selection);
+
+          setExpr(selection);
+          setHashValue(expr);
+        });
+
       });
     </script>
   </head>
