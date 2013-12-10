@@ -89,6 +89,7 @@ function graph(){
 
   function setExpr(newExpr){
     expr = newExpr;
+
     tree = math.parse(expr, scope);
   }
 

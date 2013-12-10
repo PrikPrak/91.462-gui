@@ -32,13 +32,19 @@ div
 {
   border:10px solid white;
   background-color: #FFFFCC;
-  width:500px;
+  width:510px;
   margin:auto;
 }
 
-input
-{
+.inputField
+{ 
   width:500px;
+}
+
+select, input
+{
+  width:250px;
+  margin:auto;
 }
 
 .centerText

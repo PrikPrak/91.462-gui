@@ -36,6 +36,30 @@
     <script>
       $(document).ready(function(){
         graph();
+
+        // jQuery event on the submit buttton to validate submission.
+        $("#inputForm").submit(function(event){
+          expr = $("#inputField").val(),      
+          math = mathjs(),
+          scope = {
+            x: 0,
+            t: 0
+          };
+
+          tree = '';
+
+          try{
+            tree = math.parse(expr, scope);
+            tree.eval();
+          }
+
+          catch(err){
+            console.log(err);
+            $("#message").html("ERROR: Invalid function, cannot be saved");
+            event.preventDefault();
+          }
+
+        });
       });
     </script>
   </head>
@@ -45,7 +69,7 @@
       <a href="../../index.html">Back to Home...</a>
 
       <h1>Assignment 7: Creating a Graphing Calculator Using the HTML Canvas </h1>
-
+      
       <p>
         <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fweblab.cs.uml.edu%2F~cprak%2FGUI_A5.html">HTML5</a> 
         +
@@ -56,16 +80,22 @@
     </div>
 
     <div>
-      Enter function in text field provided below in terms of x or t (time):
-      <form method="post" action="./php/addequationtodatabase.php">
-        <input type="text" id="inputField" name="inputField">
-        <input type="submit" value="Save Function" name="submit">
-      </form>
+      Enter function in text field provided below in terms of x or t (time). 
+      Have a function you'd like to save? Click on the button provided to add
+      it to the drop down menu. You could also use the drop down menu to select
+      and load previously saved functions. Enjoy!
+      <form id="inputForm" method="post" action="./php/addequationtodatabase.php">
+        <input type="text" class="inputField" id="inputField" name="inputField">
+ 
+        <input type="submit" value="Save Function" name="submit">  
 
       <!-- Reach out to the database and populate a picklist upon 
            designated database and table -->
-      <?php require "./php/populatepicklist.php"; ?>
+          <?php require "./php/populatepicklist.php"; ?>
+      </form>
          
+      <div id="message"></div>
+
       <canvas width=500 height=500 id="myCanvas"></canvas>
     </div>        
 
