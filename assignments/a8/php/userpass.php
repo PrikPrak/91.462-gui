@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8">
 <!--
-  91.461 Assignment (number): (title)
+  Filename: userpass.php
+  91.461 Assignment 8: Saving Graphing Formulae in a Server-Side Database
   Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
   Copyright (c) 2013 by Corey Prak.  All rights reserved.
-  Created by CP on (date)
 
-  NOTES:
-
-  (date - text)
+  Last Updated by CP on December 10th, 2013
+  Created by CP on December 8th, 2013
 
   CREDITS:
 
-  (link)
-  (description)
-  credit heines
+  Jesse Heines
+  Providing resources in course lecture which describe the method 
+  of defining a username and password within a separate file. Usable 
+  content in this file is completely attributed to the resources 
+  found in the lecture. 
 -->
-    <title></title>
+    <title>userpass.php</title>
   </head>
 
   <body>

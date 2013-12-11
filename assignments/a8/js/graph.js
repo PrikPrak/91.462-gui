@@ -1,13 +1,17 @@
 /*
   File: graph.js
-  91.461 Assignment (number): (title)
+  91.461 Assignment 8: Saving Graphing Formulae in a Server-Side Database
   Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
   Copyright (c) 2013 by Corey Prak.  All rights reserved.
 
-  Last Updated by CP on November 24th, 2013
+  Last Updated by CP on December 10th, 2013
+  Updated by CP on November 24th, 2013
   Created by CP on November 19th, 2013
 
   NOTES:
+
+  This file was copied over from another assignment, hence much of the history
+  is kept. 
 
   Much credits to Curran Kelleher for more than half of the contributing code
   for the assignment. More information can be found here:
@@ -151,6 +155,18 @@ function graph(){
     // Listen for any changes using jQuery
     input.keyup(function (event){
       setExpr(input.val());
+      setHashValue(expr);
+    });
+
+
+    /* Listen to picklist for a selection, as soon as a value 
+       is picked, fill input field with the value and redraw. */
+    $("#equationPicklist").change(function(){
+      selection = $("#equationPicklist").val();
+          
+      $("#inputField").val(selection);
+          
+      setExpr(selection);
       setHashValue(expr);
     });
   }

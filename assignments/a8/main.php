@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8">
 <!--
-  91.461 Assignment 7: Creating a Graphing Calculator Using the HTML Canvas
+  Filename: main.php
+  91.461 Assignment 8: Saving Graphing Formulae in a Server-Side Database
   Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
   Copyright (c) 2013 by Corey Prak.  All rights reserved.
 
+  Last Updated by CP on December 10th, 2013
   Created by CP on November 19th, 2013
-  Last Updated by CP on November 24th, 2013
-  Updated by CP on November 19th, 2013
 
   NOTES:
+
+  This file was originally used in a different assignment, thus edit history is kept.
 
   Horribly coded, I would have liked to make this more modular instead of 
   statically declaring certain aspects of the canvas, such as number labels.
@@ -55,25 +57,14 @@
 
           catch(err){
             console.log(err);
-            $("#message").html("ERROR: Invalid function, cannot be saved");
+            $("#message").html("ERROR: Invalid function, cannot be saved. Enter a valid function and try again.");
             event.preventDefault();
           }
         });
-
-        $("#equationPicklist").change(function(){
-          selection = $("#equationPicklist").val();
-
-          $("#inputField").val(selection);
-
-          setExpr(selection);
-          setHashValue(expr);
-        });
-
       });
     </script>
   </head>
   <body>
-
     <div class="centerText">
       <a href="../../index.html">Back to Home...</a>
 
@@ -98,15 +89,12 @@
  
         <input type="submit" value="Save Function" name="submit">  
 
-      <!-- Reach out to the database and populate a picklist upon 
-           designated database and table -->
-          <?php require "./php/populatepicklist.php"; ?>
+        <?php require "./php/populatepicklist.php"; ?>  
       </form>
          
-      <div id="message"></div>
+      <p id="message" class="errorText"></p>
 
       <canvas width=500 height=500 id="myCanvas"></canvas>
     </div>        
-
   </body>
 </html>
