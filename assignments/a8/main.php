@@ -40,8 +40,6 @@
 
     <script>
       $(document).ready(function(){
-        graph();
-
         // jQuery event on the submit buttton to validate submission.
         $("#inputForm").submit(function(event){
           expr = $("#inputField").val(),      
@@ -62,14 +60,19 @@
           catch(err){
             console.log(err);
             msg.html("ERROR: Invalid function, cannot be saved. Enter a valid function and try again.");
-            event.preventDefault();
 
             for ( var i=0; i < 5; i++){
               msg.animate({opacity:'0.2'},"fast");
               msg.animate({opacity:'1'},"fast");         
             }
+
+            return false;
           }
+
+          return true;
         });
+    
+        graph();
       });
     </script>
   </head>
@@ -92,11 +95,12 @@
       Enter function in text field provided below in terms of x or t (time). 
       Have a function you'd like to save? Click on the button provided to add
       it to the drop down menu. You could also use the drop down menu to select
-      and load previously saved functions. Enjoy!
+      and load previously saved functions. Links to PHP source code are provided
+      below. Enjoy!
       <form id="inputForm" method="post" action="./php/addequationtodatabase.php">
         <input type="text" class="inputField" id="inputField" name="inputField">
  
-        <input type="submit" value="Save Function" name="submit">  
+        <input type="submit" value="Save Function" name="submitButton" id="submitButton">  
 
         <?php require "./php/populatepicklist.php"; ?>  
       </form>
@@ -104,6 +108,13 @@
       <p id="message" class="errorText"></p>
 
       <canvas width=500 height=500 id="myCanvas"></canvas>
-    </div>        
+    </div> 
+
+    <div class="centerText">
+      <p>PHP Source Code</p>
+      <a href="./txt/userpass.txt">userpass.txt</a>
+      <a href="./txt/populatepicklist.txt">populatepicklist.txt</a>
+      <a href="./txt/addequationtodatabase.txt">addequationtodatabase.txt</a>
+    </div>       
   </body>
 </html>

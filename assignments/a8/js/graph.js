@@ -158,7 +158,6 @@ function graph(){
       setHashValue(expr);
     });
 
-
     /* Listen to picklist for a selection, as soon as a value 
        is picked, fill input field with the value and redraw. */
     $("#equationPicklist").change(function(){

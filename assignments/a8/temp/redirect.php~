@@ -1,0 +1,1 @@
+<?php header('Location: weblab.cs.uml.edu/~cprak/91.462-gui/assignments/a8/temp/redirected.php') ?>
