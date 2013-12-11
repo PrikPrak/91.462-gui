@@ -1,0 +1,37 @@
+    for (i = xMin; i < xMax; i++){  
+  
+      // This will be used as an interval based on the given ranges for x.
+      interval = j / (xMax - xMin);
+
+      // Computes the "length" of the interval, this is how
+      xSingleIntervalLength = ((yMax - yMin) - 1) / (yMax - yMin);
+      
+      // Flip!
+      xSingleIntervalLength = 1 - xSingleIntervalLength;
+   
+      //mathX = interval * (xMax - xMin) + xMin;
+
+//      mathY = xSingleIntervalLength * (yMax - yMin) + yMin;
+ 
+     pixelPos = interval * canvas.width; 
+     intervalPixel = xSingleIntervalLength * canvas.width;
+
+     c.moveTo(pixelPos, canvas.width/2);
+     c.lineTo(pixelPos, ((canvas.width/2) + (intervalPixel/2)));
+
+     textC.fillStyle = "black";
+     textC.font = "bold 10px Arial";
+     textC.fillText(i, pixelPos, (canvas.width/2) + intervalPixel);
+
+     c.moveTo(canvas.width/2, pixelPos);
+     c.lineTo((canvas.width/2) + (intervalPixel/2), pixelPos);
+
+     textC.fillText(i, (canvas.width/2) + (intervalPixel), pixelPos);
+
+     j++;
+     }    
+
+     c.stroke();
+  }
+}
+

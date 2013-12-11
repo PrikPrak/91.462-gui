@@ -1,0 +1,60 @@
+/*
+  File: styles.css
+  91.461 Assignment 8: Saving Graphing Formulae in a Server-Side Database
+  Corey Prak, UMass Lowell Computer Science, corey_prak@student.uml.edu
+  Copyright (c) 2013 by Corey Prak.  All rights reserved.
+
+  Last Updated by CP on Decemberth, 2013
+  Created by CP on November 24, 2013
+
+  NOTES:
+
+  This file is only used for Assignment 8, but was copied over from Assignment 7. I won't be updating this unless necessary for the sole improvement of this assignment.
+
+  CREDITS:
+
+  http://stackoverflow.com/questions/7545302/how-to-change-the-size-of-the-input-text-box
+  Changing size of input text field block.
+
+  http://net.tutsplus.com/tutorials/html-css-techniques/the-easiest-way-to-create-vertical-text-with-css/
+  Vertical text block for X and Y plane labels.
+
+  http://www.w3schools.com/css/css3_borders.asp
+  Borders in CSS.
+*/
+
+body
+{
+  background-color: gray;
+}
+
+div
+{
+  border: 10px solid white;
+  background-color: #FFFFCC;
+  width: 510px;
+  margin: auto;
+}
+
+.inputField
+{ 
+  width: 500px;
+}
+
+select, input
+{
+  width: 250px;
+  margin: auto;
+}
+
+.centerText, .errorText
+{
+  text-align: center;
+}
+
+.errorText
+{
+  color: red;
+}
+
+
