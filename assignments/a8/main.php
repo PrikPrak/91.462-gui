@@ -50,15 +50,21 @@
 
           tree = '';
 
+          msg = $("#message");
+
           try{
             tree = math.parse(expr, scope);
             tree.eval();
           }
-
           catch(err){
             console.log(err);
-            $("#message").html("ERROR: Invalid function, cannot be saved. Enter a valid function and try again.");
+            msg.html("ERROR: Invalid function, cannot be saved. Enter a valid function and try again.");
             event.preventDefault();
+
+            for ( var i=0; i < 5; i++){
+              msg.animate({opacity:'0.5'},"fast");
+              msg.animate({opacity:'1'},"fast");         
+            }
           }
         });
       });
