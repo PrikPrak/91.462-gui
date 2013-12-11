@@ -28,6 +28,9 @@
 
   http://www.w3schools.com/css/css3_borders.asp
   How to create borders in CSS. 
+
+  http://www.w3schools.com/jquery/eff_animate.asp
+  JQuery animation for error message to flash in opacity. 
 -->
     <title>Graphing Calculator</title>
     <script src="js/jquery-1.10.2.min.js"></script>
@@ -62,7 +65,7 @@
             event.preventDefault();
 
             for ( var i=0; i < 5; i++){
-              msg.animate({opacity:'0.5'},"fast");
+              msg.animate({opacity:'0.2'},"fast");
               msg.animate({opacity:'1'},"fast");         
             }
           }
