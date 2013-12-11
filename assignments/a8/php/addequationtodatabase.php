@@ -49,9 +49,7 @@
                 or die( "<p>Error insertng into the database: " .
                         mysql_error() . "</p>" ) ;
 
-      echo "Added " . $equation . " to database.";
-
-      echo "<p><a href='../main.php'>Return to Page</a></p>";
+      echo "Successfully Added " . $equation . " to database! " . "<a href='../main.php'>Click here</a> to return to previous page, or simply navigate back. If you do navigate backwards, changes may not be seen until the page is refreshed.";
     ?>
   </body>
 </html>
