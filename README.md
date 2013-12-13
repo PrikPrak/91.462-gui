@@ -7,3 +7,5 @@ Gui Project Sequence Repository
   Since the course is completed, any additional commits after 12/12/2013 will be minor, made only to refactor files or cosmetically polish the look of the pages. 
   
   You're welcome to leave any kind of feedback, and I'll be sure to update this readme as much as my schedule allows. Enjoy!
+
+  [Index](http://weblab.cs.uml.edu/~cprak/91.462-gui/index.html)
