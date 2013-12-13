@@ -80,8 +80,8 @@
     <div class="centerText">
       <a href="../../index.html">Back to Home...</a>
 
-      <h1>Assignment 7: Creating a Graphing Calculator Using the HTML Canvas </h1>
-      
+      <h1>Assignment 8: Saving Graphing Formulae in a Server-Side Database</h1>
+
       <p>
         <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fweblab.cs.uml.edu%2F~cprak%2FGUI_A5.html">HTML5</a> 
         +
